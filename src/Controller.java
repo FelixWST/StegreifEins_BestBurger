@@ -1,7 +1,7 @@
 public class Controller {
     final static int MAX_BURGER_AMOUNT = 5;
 
-
+//Kommentar von Felix
     final static String[][] BEFEHLE = {
             {"menu", "Mit menu kannst Du Dir unsere Speisekarte ausgeben lassen!"},
             {"", ""}
