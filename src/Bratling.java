@@ -1,5 +1,5 @@
 public class Bratling extends Zutat{
-
+//Kommentar
     protected int bratzeit;
     protected int hoehe;
 
