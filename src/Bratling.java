@@ -1,5 +1,5 @@
 public class Bratling extends Zutat{
-//Kommentar
+
     protected int bratzeit;
     protected int hoehe;
 
@@ -10,8 +10,10 @@ public class Bratling extends Zutat{
     }
 
     public int zubereiten(){
-
-        return 0;
+        int minuten = (bratzeit/2)/60;
+        int sekunden = (bratzeit/2)%60;
+        System.out.println("- "+name+" von jeder Seite "+minuten+" Minuten und "+sekunden+" Sekunden grillen.");
+        return bratzeit;
     }
 
     public int berechneHoehe(){

@@ -1,0 +1,12 @@
+-Menüführung verbessern
+-Aufforderung gib x. zutat ein
+-limitierung Burgerbrötchen min&max 1
+-darstellung kommas
+-geschmack als array -> normal raus
+-javadoc
+-hoehe float / int?
+-einheiten ergänzen
+-salzige soße
+-käse
+-Ausgabe aktuelle Burgerzahl
+-Sonderzeichen Euro

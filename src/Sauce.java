@@ -16,4 +16,8 @@ public class Sauce extends Zutat{
         return super.toString()+" | "+geschmack;
 
     }
+
+    public String getGeschmack() {
+        return geschmack;
+    }
 }
