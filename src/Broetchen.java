@@ -15,9 +15,13 @@ public class Broetchen extends Zutat{
         return 0;
     }
 
-    public int berechneHoehe (){
-    // gewinnt pro Minute Backzeit 2% an Höhe
-    return 0;
+
+    public int berechneHoehe() {
+        // gewinnt pro Minute Backzeit 2% an Höhe
+        //int backHoehe = (int)(((float)backzeit/60.0)*((float)hoehe/100.0*2.0));
+        float backHeight = ((float) (backzeit) / 60.0f) * (((float) (hoehe) / 100.0f) * 2.0f);
+        //System.out.println(backHeight);
+        return hoehe;
     }
 
     public String toString(){

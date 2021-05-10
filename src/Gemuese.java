@@ -15,13 +15,14 @@ public class Gemuese extends Zutat{
     }
 
     public int berechneHoehe (){
-
-        return 0;
+        return scheibenAnzahl*scheibenDicke;
     }
 
     public String toString(){
         String ausgabe = (super.toString());
         return ausgabe;
     }
+
+
 
 }

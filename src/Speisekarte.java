@@ -21,7 +21,7 @@ public class Speisekarte {
         zutatenListe[1][0] = new Bratling(20,"Rindfleisch (Original)", 1.85F,true,false,false, 270, 25);
         zutatenListe[1][1] = new Bratling(21,"Haehnchenfleisch gegrillt", 1.15F, false, false, false,180 ,11);
         zutatenListe[1][2] = new Bratling(22,"Falafel-Bratling", 1.45F,false,true,true, 210, 21);
-        zutatenListe[1][3] = new Bratling(20,"Gemuesebratling", 1.75F,false,false,true, 240, 25);
+        zutatenListe[1][3] = new Bratling(23,"Gemuesebratling", 1.75F,false,false,true, 240, 25);
 
         //Zutaten an Index [2][X] = Salate
         zutatenListe[2][0] = new Salat(30,"Eisbergsalat",0.18f,true);
@@ -58,8 +58,11 @@ public class Speisekarte {
             int itemNumber = zutatID%10;
             int rowNumber = zutatID/10;
 
-            if(zutatenListe[rowNumber][itemNumber]!=null){
-                return zutatenListe[rowNumber][itemNumber];
+            if(zutatenListe[rowNumber-1][itemNumber]!=null){
+                return zutatenListe[rowNumber-1][itemNumber];
+            }else{
+                System.out.println("Die Zutat mit der Nummer "+zutatID+" existiert nicht!");
+                return null;
             }
         }
         return null;
