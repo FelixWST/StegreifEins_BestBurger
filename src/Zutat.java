@@ -2,7 +2,6 @@ public abstract class Zutat {
     protected int nummer;
     protected String name;
     protected float preis;
-
     protected boolean klassisch;
     protected boolean vegan;
     protected boolean vegetarisch;
@@ -26,6 +25,7 @@ public abstract class Zutat {
         return this.preis;
     }
 
+    @Override
     public String toString(){
         String ausgabe = nummer+" - "+name+" | "+preis+" Euro";
 

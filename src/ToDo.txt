@@ -1,12 +1,1 @@
--Menüführung verbessern
--Aufforderung gib x. zutat ein
--limitierung Burgerbrötchen min&max 1
--darstellung kommas
--geschmack als array -> normal raus
--javadoc
--hoehe float / int?
--einheiten ergänzen
--salzige soße
--käse
--Ausgabe aktuelle Burgerzahl
--Sonderzeichen Euro
+https://trello.com/invite/b/7jAdYKfz/f69a7dd2e24d534d32842d3eb2d363cf/prog2-stegreif-1-bestburger

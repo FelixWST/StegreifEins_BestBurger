@@ -9,6 +9,7 @@ public class Gemuese extends Zutat{
         this.scheibenAnzahl=scheibenAnzahl;
     }
 
+    @Override
     public int zubereiten(){
 
         return 0;
@@ -18,6 +19,7 @@ public class Gemuese extends Zutat{
         return scheibenAnzahl*scheibenDicke;
     }
 
+    @Override
     public String toString(){
         String ausgabe = (super.toString());
         return ausgabe;
