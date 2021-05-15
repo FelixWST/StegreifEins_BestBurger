@@ -54,18 +54,17 @@ public class Speisekarte {
     }
 
     public static Zutat getZutatByID(int zutatID){
-        if(zutatID<100){
             int itemNumber = zutatID%10;
             int rowNumber = zutatID/10;
 
-            if(zutatenListe[rowNumber-1][itemNumber]!=null){
-                return zutatenListe[rowNumber-1][itemNumber];
-            }else{
-                System.out.println("Die Zutat mit der Nummer "+zutatID+" existiert nicht!");
-                return null;
+            if(zutatenListe.length>=rowNumber&&zutatenListe[rowNumber-1].length>itemNumber){
+                if(zutatenListe[rowNumber-1][itemNumber]!=null){
+                    return zutatenListe[rowNumber-1][itemNumber];
+                }
             }
-        }
-        return null;
+            System.out.println("Die Zutat mit der Nummer "+zutatID+" existiert nicht!");
+            return null;
+
     }
 
 

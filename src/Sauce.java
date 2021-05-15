@@ -8,10 +8,12 @@ public class Sauce extends Zutat{
         this.geschmack = geschmack;
     }
 
+    @Override
     public int zubereiten() {
         return 0;
     }
 
+    @Override
     public String toString() {
         return super.toString()+" | "+geschmack;
 

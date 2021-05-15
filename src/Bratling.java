@@ -9,18 +9,28 @@ public class Bratling extends Zutat{
         this.hoehe=hoehe;
     }
 
+    @Override
     public int zubereiten(){
         int minuten = (bratzeit/2)/60;
         int sekunden = (bratzeit/2)%60;
-        System.out.println("- "+name+" von jeder Seite "+minuten+" Minuten und "+sekunden+" Sekunden grillen.");
+
+
+        String zubereitungszeit = minuten+" Minuten";
+        if(sekunden>0){
+            zubereitungszeit += " und "+sekunden+" Sekunden";
+        }
+
+        System.out.println("- "+name+" von jeder Seite "+zubereitungszeit+" grillen.");
         return bratzeit;
     }
 
-    public int berechneHoehe(){
+    @Override
+    public float berechneHoehe(){
     //Bratling verliert um 3,5% pro Minute Bratzeit an Höhe
         return 0;
     }
 
+    @Override
     public String toString(){
         String ausgabe = (super.toString());
         return ausgabe;

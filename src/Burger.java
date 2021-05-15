@@ -1,8 +1,7 @@
 public class Burger {
     protected String burgerName;
-    protected float zubereitungsZeit;
+    protected int zubereitungsZeit;
     protected Zutat zutatenListe[] = new Zutat[12];
-    //oder broetchen extra? -> Wechsel moeglich?
 
     public Burger(){
         for(Zutat zutat : zutatenListe){
@@ -10,10 +9,11 @@ public class Burger {
         }
     }
 
-    public float berechneHoehe(){
-        float hoehe=0;
-        for(Zutat zutat : zutatenListe){
-            if(zutat!=null){
+
+    public float berechneHoehe() {
+        float hoehe = 0;
+        for (Zutat zutat : zutatenListe) {
+            if (zutat != null) {
                 hoehe += zutat.berechneHoehe();
             }
 
@@ -31,7 +31,7 @@ public class Burger {
         return preis;
     }
 
-    public float berechneZeit(){
+    public int berechneZeit() {
         int gesamtZeit = 0;
         int offsetChar = 65;
 
@@ -44,19 +44,32 @@ public class Burger {
         return gesamtZeit/60.0f;
     }
 
-    public void belegen(Zutat neueZutat){
-        if(zutatenListe[zutatenListe.length-1]==null){
-            for(int i = 0; i<zutatenListe.length;i++){
-                if(zutatenListe[i]==null){
-                    zutatenListe[i]=neueZutat;
-                    break;
+    public void belegen(Zutat neueZutat) {
+        if (!hatBroetchen()) {
+            if (zutatenListe[zutatenListe.length - 2] != null && zutatenListe[zutatenListe.length - 1] == null) {
+                if (!(neueZutat instanceof Broetchen)) {
+                    System.out.println("Die Zutat konnte nicht hinzugef\u00fcgt werden.");
+                    System.out.println("Dein Burger ben\u00f6tigt noch ein Broetchen.");
+                    return;
                 }
             }
-        }else{
+        }
+        if (zutatenListe[zutatenListe.length - 1] == null) {
+            if (neueZutat instanceof Broetchen && hatBroetchen()) {
+                System.out.println("Der Burger hat bereits ein Br\u00f6tchen!");
+                System.out.println("W\u00e4hle eine andere Zutat!");
+            } else {
+                for (int i = 0; i < zutatenListe.length; i++) {
+                    if (zutatenListe[i] == null) {
+                        zutatenListe[i] = neueZutat;
+                        System.out.println("Die Zutat " + neueZutat.getName() + " - " + neueZutat.getPreis() + " € wurde hinzugef\u00fcgt!");
+                        break;
+                    }
+                }
+            }
+        } else {
             System.out.println("Der Burger ist schon komplett belegt!");
         }
-
-
     }
 
     public String zubereiten(){
@@ -123,10 +136,11 @@ public class Burger {
         return this.burgerName;
     }
 
-    public String toString(){
-        String sorte ="";
-        if(istKlassisch()){
-            sorte += " , klassisch";
+    @Override
+    public String toString() {
+        String sorte = "";
+        if (istKlassisch()) {
+            sorte += ", klassisch";
         }
         if(istVegan()){
             sorte+= " , vegan";
@@ -151,7 +165,37 @@ public class Burger {
         return ausgabe;
     }
 
-    public float getZubereitungsZeit() {
+    public int getZubereitungsZeit() {
         return zubereitungsZeit;
+    }
+
+    public boolean hatBroetchen() {
+        for (Zutat zutat : zutatenListe) {
+            if (zutat instanceof Broetchen) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int[] wieVoll() {
+        int[] fuellstand = new int[2];
+        fuellstand[1] = zutatenListe.length;
+
+        int zutatenZaehler = 0;
+
+        for (Zutat zutat : zutatenListe) {
+            if (zutat != null) {
+                zutatenZaehler++;
+            }
+        }
+        fuellstand[0] = zutatenZaehler;
+        return fuellstand;
+    }
+
+    public void zutatenLeeren(){
+        for(int i = 0; i<zutatenListe.length;i++){
+            zutatenListe[i]=null;
+        }
     }
 }
