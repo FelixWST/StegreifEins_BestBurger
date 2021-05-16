@@ -35,17 +35,22 @@ public class Controller {
 
         System.out.println("Willkommen bei You'll never Burger alone!");
         System.out.println("=========================================\n");
+        delay(1000);
         System.out.println("Kreiere bis zu f\u00fcnf eigene Burger und reiche diese bei unserem Burger-Wettbewerb ein.");
         System.out.println("Durch verschiedene Befehle kannst du den Burger des Jahres 2021 erstellen, der durch eine hochrangige Jury gew\u00e4hlt wird!\n");
+        delay(1000);
         zeigeBefehle();
+        delay(1000);
         System.out.println("\nBedenke allerdings, dass dein Burger nur aus 12 Zutaten bestehen darf, davon muss exakt eine ein Burger-Br\u00f6tchen sein!");
         System.out.println("Viel Spaß beim Erstellen deiner Burger!\n");
+        delay(1000);
 
         /**
          * Hauptbestandteil der Programmfuehrung
          * While-schleife erwartet Befehl und fuehrt diesen aus, bis eingereicht wurde
          */
         while(!abgeschlossen){
+            delay(500);
             System.out.println("=========================================\n");
             if(zusammenstellungAktiv){
                 System.out.println("Du hast eine aktive Zusammenstellung.");
@@ -165,6 +170,7 @@ public class Controller {
                     }
                     break;
 
+                //einreichen der Burger
                 case "einreichen":
                     if(zusammenstellungAktiv){//Bevor eingereicht werden kann, muss jeder Burger abgeschlossen sein
                         System.out.println("\nDu stellst gerade einen Burger zusammen.");
@@ -211,6 +217,7 @@ public class Controller {
                     }
                     break;
 
+                //leeren der Zutaten des momentan aktiv zusammenstellenden Burgers
                 case "leeren":
                     if(zusammenstellungAktiv){
                         if(burgerListe[burgerIndex].wieVoll()[0]==0){
@@ -231,6 +238,7 @@ public class Controller {
                     }
                     break;
 
+                //löschen eines bereits erstellten Burgers
                 case "l\u00f6schen":
                     //Loeschen ist nur moeglich, wenn alle Burger abgeschlossen sind
                     if(zusammenstellungAktiv){
@@ -301,6 +309,7 @@ public class Controller {
         System.out.print("\nDeine Eingabe:");
 
         if(StaticScanner.nextString().toLowerCase().equals("ja")){
+            System.out.println("\nBitte w\u00e4hle im folgenden Fenster den Speicherort aus...");
             BurgerExporter burgerExporter = new BurgerExporter();
             System.out.println("\n"+burgerExporter.exportBurger(burgerListe));
         }else{
@@ -321,12 +330,28 @@ public class Controller {
         }
     }
 
+    /**
+     * Methode zum Herausfinden ob die Eingabe ein Integer-Wert ist
+     * @return ist die Eingabe ein Integer?
+     * @param check der zu pruefende String
+     */
     public static boolean istStringInteger(String check) {
         try {
             int wert = Integer.parseInt(check);
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    /**
+     * Methode, um die Ausgabe durch kurzes pausieren des Programmablaufs, uebersichtlicher zu machen
+     * @param timeInMillis zu pausierende Zeit in millisekunden
+     */
+    public static void delay(int timeInMillis){
+        try{
+            Thread.sleep(timeInMillis);
+        }catch(Exception e){
         }
     }
 }
