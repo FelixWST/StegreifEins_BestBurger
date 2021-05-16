@@ -6,13 +6,16 @@ public class Salat extends Zutat {
 
     @Override
     public int zubereiten() {
-        System.out.println ("- "+ name + " wird gewaschen");
+        System.out.println(rezept());
         return 0;
     }
 
-
+    /**
+     * Spezielle Zubereitungsanweisung fuer Zutaten des Typs Salat.
+     * @return Zubereitungshinweis als String
+     */
     @Override
-    public String toString() {
-        return super.toString();
+    public String rezept() {
+        return "- "+ name + " wird gewaschen";
     }
 }

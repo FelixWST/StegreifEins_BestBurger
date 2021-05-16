@@ -15,16 +15,31 @@ public class Broetchen extends Zutat{
         return 0;
     }
 
-
-    public int berechneHoehe() {
-        // gewinnt pro Minute Backzeit 2% an Höhe
-        //int backHoehe = (int)(((float)backzeit/60.0)*((float)hoehe/100.0*2.0));
-        float backHeight = ((float) (backzeit) / 60.0f) * (((float) (hoehe) / 100.0f) * 2.0f);
-        //System.out.println(backHeight);
-        return hoehe;
+    /**
+     * Ein Broetchen hat eine Hoehe. Allerdings ist diese dynamisch, da das Broetchen mit der Backzeit um 2% pro Minute aufgeht.
+     * @return dynamische Hoehe des Broetchens nach Backzeit
+     */
+    @Override
+    public float berechneHoehe() {
+        float backHeight = (( backzeit / 60.0f) * (hoehe / 100.0f) * 2.0f);
+        return hoehe+backHeight;
     }
 
-    public String toString(){
-        return super.toString();
+    /**
+     * Spezielle Zubereitungsanweisung fuer Burgerbroetchen.
+     * Sekunden werden nur mit ausgegeben, wenn es keine glatte Minutenzahl ist.
+     *
+     * @return Zubereitungshinweis als String
+     */
+    @Override
+    public String rezept() {
+        int minuten = backzeit / 60;
+        int sekunden = backzeit % 60;
+
+        String zubereitungszeit = minuten+" Minuten";
+        if(sekunden>0){
+            zubereitungszeit += " und "+sekunden+" Sekunden";
+        }
+        return "- " + name +" "+ zubereitungszeit+ " r\u00f6sten";
     }
 }
