@@ -1,3 +1,8 @@
+/**
+ * Klasse Burger zum Erstellen Verwalten der Burgerobjekte
+ *
+ * @author Emily Jung, Neele Wolf, Felix Wuest
+ */
 public class Burger {
     final static int MAXIMALE_ZUTATEN_ANZAHL = 12;
 
@@ -15,7 +20,10 @@ public class Burger {
         }
     }
 
-
+    /**
+     * Methode zum Berechnen der gesamten Höhe des Burgers
+     * @return hoehe in cm
+     */
     public float berechneHoehe() {
         float hoehe = 0;
         for (Zutat zutat : zutatenListe) {
@@ -23,32 +31,47 @@ public class Burger {
                 hoehe += zutat.berechneHoehe();
             }
         }
-        return (hoehe/10);
+        return (hoehe / 10);
     }
 
-    public float berechnePreis(){
+    /**
+     * Methode zur Berechnung des Gesamtpreises des Burgers
+     * @return Gesamtpreis in Euro
+     */
+    public float berechnePreis() {
         float preis = 0;
-        for(Zutat zutat : zutatenListe){
-            if(zutat!=null){
-                preis +=zutat.getPreis();
+        for (Zutat zutat : zutatenListe) {
+            if (zutat != null) {
+                preis += zutat.getPreis();
             }
         }
         return preis;
     }
 
+    /**
+     * Methode zum Berechnen der Zubereitungszeit des Burgers
+     * @return gesamtzeit in Sekunden
+     */
     public int berechneZeit() {
         int gesamtZeit = 0;
         int offsetChar = 65; //Zur Auflistung mittels Buchstaben -> Umwandlung in Char: 65 = A
 
-        for(int i =0; i< zutatenListe.length;i++){
-            if(zutatenListe[i]!=null){
-                System.out.print((char)(i+offsetChar)+" ");
-                gesamtZeit+=zutatenListe[i].zubereiten();
+        for (int i = 0; i < zutatenListe.length; i++) {
+            if (zutatenListe[i] != null) {
+                System.out.print((char) (i + offsetChar) + " ");
+                gesamtZeit += zutatenListe[i].zubereiten();
             }
         }
-        return gesamtZeit/60.0f;
+        return gesamtZeit;
     }
 
+    /**
+     * Methode zum Hinzufügen von Zutaten
+     * Begrenzung auf genau 1 Broetchen
+     * Begrenzung auf 12 Zutaten inklusive Brotchen
+     * Wenn Burger kein Broetchen hat, ist als letzte Zutat nur noch ein Broetchen zulaessig!
+     * @param neueZutat die zu belegende Zutat
+     */
     public void belegen(Zutat neueZutat) {
         if (!hatBroetchen()) {
             if (zutatenListe[zutatenListe.length - 2] != null && zutatenListe[zutatenListe.length - 1] == null) {
@@ -67,7 +90,7 @@ public class Burger {
                 for (int i = 0; i < zutatenListe.length; i++) {
                     if (zutatenListe[i] == null) {
                         zutatenListe[i] = neueZutat;
-                        System.out.println("Die Zutat " + neueZutat.getName() + " - " + neueZutat.getPreis() + " € wurde hinzugef\u00fcgt!");
+                        System.out.println("Die Zutat \"" + neueZutat.getName() + "\" - " + String.format("%.2f",neueZutat.getPreis()) + " € wurde hinzugef\u00fcgt!\n");
                         break;
                     }
                 }
@@ -76,11 +99,12 @@ public class Burger {
             System.out.println("Der Burger ist schon komplett belegt!\n");
         }
     }
-
-    public String zubereiten(){
-        System.out.println("Und so geht's:");
+    /**
+     * Methode zum Ausgeben der Zubereitungsanweisungen aller genutzten Zutaten
+     */
+    public void zubereiten() {
+        System.out.println("\nUnd so stellst du deinen Burger her:\n");
         this.zubereitungsZeit = berechneZeit();
-        return "";
     }
 
     /**
@@ -89,9 +113,9 @@ public class Burger {
      */
     public boolean istVegan() {
         boolean vegan = true;
-        for(Zutat zutat : zutatenListe){
-            if(zutat!=null){
-                if(!zutat.isVegan()){
+        for (Zutat zutat : zutatenListe) {
+            if (zutat != null) {
+                if (!zutat.isVegan()) {
                     vegan = false;
                     break;
                 }
@@ -99,12 +123,15 @@ public class Burger {
         }
         return vegan;
     }
-
-    public boolean istVegetarisch(){
+    /**
+     * Methode zum Herausfinden ob jede Zutat vegetarisch ist
+     * @return Zutat = vegetarisch? true oder false
+     */
+    public boolean istVegetarisch() {
         boolean vegetarisch = true;
-        for(Zutat zutat : zutatenListe){
-            if(zutat!=null){
-                if(!zutat.isVegetarisch()){
+        for (Zutat zutat : zutatenListe) {
+            if (zutat != null) {
+                if (!zutat.isVegetarisch()) {
                     vegetarisch = false;
                     break;
                 }
@@ -113,11 +140,15 @@ public class Burger {
         return vegetarisch;
     }
 
-    public boolean istKlassisch(){
+    /**
+     * Methode zum Herausfinden ob jede Zutat klassisch ist
+     * @return Zutat = klassisch? true oder false
+     */
+    public boolean istKlassisch() {
         boolean klassisch = true;
-        for(Zutat zutat : zutatenListe){
-            if(zutat!=null){
-                if(!zutat.isKlassisch()){
+        for (Zutat zutat : zutatenListe) {
+            if (zutat != null) {
+                if (!zutat.isKlassisch()) {
                     klassisch = false;
                     break;
                 }
@@ -126,58 +157,97 @@ public class Burger {
         return klassisch;
     }
 
-   public String hatSauce(){
+    /**
+     * Methode um den speziellen Geschmack anhand der Sauce festzulegen
+     * @return String ausgabe mit Geschmack der Saucen ohne "normal"
+     */
+    public String hatSauce() {
         //Umwandlung in String array
-        String ausgabe="";
-        for(Zutat zutat : zutatenListe){
-            if(zutat!=null&&zutat instanceof Sauce){
-                ausgabe += ((Sauce) zutat).getGeschmack()+", ";
+        // String beginnt mit Komma, da an Burgerinfos angereiht
+        String ausgabe = ", ";
+        for (Zutat zutat : zutatenListe) {
+            // guckt ob die zutat eine Sauce ist
+            if (zutat != null && zutat instanceof Sauce) {
+                // der Geschmack Sauce soll nicht mit ausgegeben werden
+                if (!((Sauce) zutat).getGeschmack().equals("normal")) {
+                    // dem ausgabe String wird der neue Geschmack hinzugefügt und ein komma ergänzt
+
+                    ausgabe += ((Sauce) zutat).getGeschmack() + ", ";
+                }
             }
         }
-        return ausgabe;
-   }
+        // Um am Ende kein Komma zu haben, wird "#space" angehaengt und mit ".replace All" alle ", #space" ersetzt
+        // da der String ausgabe mit ", " startet, wuerde dieser im Falle von keine Sauce leer zurueckgegeben werden
+            ausgabe += "#space";
+            ausgabe = ausgabe.replaceAll(", #space", "");
 
+        return ausgabe;
+    }
+    /**
+     * Methode um Burger einen eigenen Namen zu geben
+     * @param burgerName der zu setztende Burgername
+     */
     public void setBurgerName(String burgerName) {
         this.burgerName = burgerName;
     }
 
-    public String getBurgerName(){
+    /**
+     * Getter für den Burgernamen, der in setBurgerName festgelegt wurde
+     * @return burgername
+     */
+    public String getBurgerName() {
         return this.burgerName;
     }
-
+    /**
+     * Methode zum Ausgeben der Rezeptinformationen und benutzten Zutaten
+     * @return Rezept: Titelzeile und Zutaten
+     */
     @Override
     public String toString() {
         String sorte = "";
         if (istKlassisch()) {
             sorte += ", klassisch";
         }
-        if(istVegan()){
-            sorte+= " , vegan";
-        }else if(istVegetarisch()){
-            sorte+= " , vegetarisch";
+        if (istVegan()) {
+            sorte += ", vegan";
+        } else if (istVegetarisch()) {
+            sorte += ", vegetarisch";
         }
 
         String saucen = hatSauce();
 
-        String titelzeile ="Rezept -"+burgerName+" ("+berechneHoehe()+"cm "+ sorte + saucen+") - "+berechnePreis()+" Euro \n";
-        String zutaten ="Zutaten: ";
+        String titelzeile = "Rezept - " + burgerName + " (" + String.format("%.1f",berechneHoehe()) + " cm" + sorte + saucen + ") - " + String.format("%.2f",berechnePreis())+ " € \n" +
+                "________________________________________________________________________________________\n \n";
 
-        for(Zutat zutat : zutatenListe){
-            if(zutat!=null){
-                zutaten += zutat.getName()+",";
+        String zutaten = "Zutaten: ";
+
+        for (Zutat zutat : zutatenListe) {
+            if (zutat != null) {
+                zutaten += zutat.getName() + ", ";
             }
 
         }
-
+        // am Ende wird ein "#space" uebersetzt und eine passende Form zum Ueberschreiben zu erhalten
+        zutaten += "#space";
+        // Alle ", #space" werden ueberschrieben, sodass am Ende kein Komma steht
+        zutaten = zutaten.replaceAll(", #space", "");
         String ausgabe = titelzeile + zutaten;
 
         return ausgabe;
     }
 
+    /**
+     * Getter für die Zubereitungszeit
+     * @return zubereitungszeit in Sekunden
+     */
     public int getZubereitungsZeit() {
         return zubereitungsZeit;
     }
 
+    /**
+     * Methode zur Kontrolle ob es shcon ein Broetchen gibt
+     * @return boolean true oder false
+     */
     public boolean hatBroetchen() {
         for (Zutat zutat : zutatenListe) {
             if (zutat instanceof Broetchen) {
@@ -186,7 +256,10 @@ public class Burger {
         }
         return false;
     }
-
+    /**
+     * Methode um Anzahl der Zutaten auf dem Burger herauszufinden
+     * @return Anzahl der benutzten Zutaten
+     */
     public int[] wieVoll() {
         int[] fuellstand = new int[2];
         fuellstand[1] = zutatenListe.length;
@@ -202,6 +275,9 @@ public class Burger {
         return fuellstand;
     }
 
+    /**
+     * Methode um aktuelle Zutaten des Burger zu löschen
+     */
     public void zutatenLeeren(){
         for(int i = 0; i<zutatenListe.length;i++){
             zutatenListe[i]=null;
