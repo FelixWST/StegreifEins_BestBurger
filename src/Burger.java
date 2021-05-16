@@ -1,10 +1,16 @@
 public class Burger {
+    final static int MAXIMALE_ZUTATEN_ANZAHL = 12;
+
     protected String burgerName;
     protected int zubereitungsZeit;
-    protected Zutat zutatenListe[] = new Zutat[12];
+    protected Zutat zutatenListe[] = new Zutat[MAXIMALE_ZUTATEN_ANZAHL];
 
-    public Burger(){
-        for(Zutat zutat : zutatenListe){
+    /**
+     * Standardkonstruktor des Burgers
+     * bei instanziierung wird die ZutatenListe mit null gefuellt
+     */
+    public Burger() {
+        for (Zutat zutat : zutatenListe) {
             zutat = null;
         }
     }
@@ -16,7 +22,6 @@ public class Burger {
             if (zutat != null) {
                 hoehe += zutat.berechneHoehe();
             }
-
         }
         return (hoehe/10);
     }
@@ -33,7 +38,7 @@ public class Burger {
 
     public int berechneZeit() {
         int gesamtZeit = 0;
-        int offsetChar = 65;
+        int offsetChar = 65; //Zur Auflistung mittels Buchstaben -> Umwandlung in Char: 65 = A
 
         for(int i =0; i< zutatenListe.length;i++){
             if(zutatenListe[i]!=null){
@@ -49,7 +54,7 @@ public class Burger {
             if (zutatenListe[zutatenListe.length - 2] != null && zutatenListe[zutatenListe.length - 1] == null) {
                 if (!(neueZutat instanceof Broetchen)) {
                     System.out.println("Die Zutat konnte nicht hinzugef\u00fcgt werden.");
-                    System.out.println("Dein Burger ben\u00f6tigt noch ein Broetchen.");
+                    System.out.println("Dein Burger ben\u00f6tigt noch ein Broetchen.\n");
                     return;
                 }
             }
@@ -57,7 +62,7 @@ public class Burger {
         if (zutatenListe[zutatenListe.length - 1] == null) {
             if (neueZutat instanceof Broetchen && hatBroetchen()) {
                 System.out.println("Der Burger hat bereits ein Br\u00f6tchen!");
-                System.out.println("W\u00e4hle eine andere Zutat!");
+                System.out.println("W\u00e4hle eine andere Zutat!\n");
             } else {
                 for (int i = 0; i < zutatenListe.length; i++) {
                     if (zutatenListe[i] == null) {
@@ -68,7 +73,7 @@ public class Burger {
                 }
             }
         } else {
-            System.out.println("Der Burger ist schon komplett belegt!");
+            System.out.println("Der Burger ist schon komplett belegt!\n");
         }
     }
 
@@ -78,7 +83,11 @@ public class Burger {
         return "";
     }
 
-    public boolean istVegan(){
+    /**
+     * Methode zum Herausfinden ob jede Zutat vegan ist
+     * @return Zutat = vegan? true oder false
+     */
+    public boolean istVegan() {
         boolean vegan = true;
         for(Zutat zutat : zutatenListe){
             if(zutat!=null){

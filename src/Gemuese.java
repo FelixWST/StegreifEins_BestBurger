@@ -20,11 +20,7 @@ public class Gemuese extends Zutat{
     }
 
     @Override
-    public String toString(){
-        String ausgabe = (super.toString());
-        return ausgabe;
+    public String rezept() {
+        return "- " + name + " wird gewaschen";
     }
-
-
-
 }

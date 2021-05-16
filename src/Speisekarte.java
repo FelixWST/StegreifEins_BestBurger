@@ -1,8 +1,24 @@
+/**
+ * Die Klasse Speisekarte dient der Zutatenverwaltung, sowohl fuer die Benutzerauswahl einer Zutat, als auch fuer das belegen eines Burgers.
+ *
+ * @author Emily Jung, Neele Wolf, Felix Wuest
+ */
 public class Speisekarte {
 
-    static Zutat [][] zutatenListe = new Zutat[5][4];
-    String[] kategorien = {"Broetchen: ", "Bratlinge:", "Salate:", "Gemuese:", "Saucen:"};
+    /**
+     * fest vorgegebene Anzahl an Kategorien und Zutaten pro Kategorie.
+     * Diese muss bei Erweiterung der Speisekarte angepasst werden.
+     */
+    final static int ANZAHL_ZUTATEN_KATEGORIEN = 6;
+    final static int MAX_ZUTATEN_PRO_KATEGORIE = 5;
 
+    static Zutat[][] zutatenListe = new Zutat[ANZAHL_ZUTATEN_KATEGORIEN][MAX_ZUTATEN_PRO_KATEGORIE];
+    String[] kategorien = new String[ANZAHL_ZUTATEN_KATEGORIEN];
+
+    /**
+     * Standardkonstruktor der Speisekarte. Bei der Instanziierung wird die zutatenListe zuerst komplett auf null gesetzt, um Probleme zu vermeiden, wenn eine Kategorie nicht die gesamte Zeile fuellt.
+     * danach wird den Produktnummern entsprechend das Array mit den einzelnen Zutaten gefuellt.
+     */
     public Speisekarte(){
 
         for(Zutat kategorie[] : zutatenListe){
@@ -41,8 +57,11 @@ public class Speisekarte {
     }
 
 
+    /**
+     * Gibt die Speisekarte formatiert nach Kategorie aus.
+     */
     public void zeigeSpeisekarte(){
-        System.out.println("Die Speisekarte: \n");
+        System.out.println("\nDie Speisekarte: \n");
         for(int i = 0; i<zutatenListe.length; i++){
         System.out.println(kategorien[i]);
             for(int j = 0; j<zutatenListe[0].length; j++){
@@ -53,6 +72,16 @@ public class Speisekarte {
         }
     }
 
+    /**
+     * Um eine Zutat der Speisekarte auszuwaehlen, kann diese ueber die Produktnummer adressiert werden.
+     * Dafuer muessen die Zutaten dem arrayindex entsprechend richtig angelegt sein.
+     *
+     * Die Methode uebernimmt die Umrechnung von Produktnummer zu Arrayindex und gibt die richtige Zutat zurueck.
+     * Gibt es die Zutat nicht, wird dies abgefangen und null zurueckgegben.
+     *
+     * @param zutatID Produktnummer entsprechend der Speisekarte
+     * @return gibt die gewaehlte Zutat zurueck, sofern existent. Ansonsten null.
+     */
     public static Zutat getZutatByID(int zutatID){
             int itemNumber = zutatID%10;
             int rowNumber = zutatID/10;
@@ -62,7 +91,7 @@ public class Speisekarte {
                     return zutatenListe[rowNumber-1][itemNumber];
                 }
             }
-            System.out.println("Die Zutat mit der Nummer "+zutatID+" existiert nicht!");
+            System.out.println("Die Zutat mit der Nummer "+zutatID+" existiert nicht!\n");
             return null;
 
     }
